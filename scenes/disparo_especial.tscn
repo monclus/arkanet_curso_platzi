@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://yyig8ty5m624"]
+
+[ext_resource type="PackedScene" uid="uid://cvwfb3sticatc" path="res://scenes/Disparo.tscn" id="1_ie03o"]
+[ext_resource type="Script" uid="uid://j4rqegek6pv2" path="res://scripts/disparo_especial.gd" id="1_q17p7"]
+
+[node name="DisparoEspecial" type="Node2D"]
+script = ExtResource("1_q17p7")
+
+[node name="Disparo" parent="." instance=ExtResource("1_ie03o")]
+position = Vector2(0, -100)
+
+[node name="Disparo2" parent="." instance=ExtResource("1_ie03o")]
+position = Vector2(50, 0)
+
+[node name="Disparo3" parent="." instance=ExtResource("1_ie03o")]
+position = Vector2(0, 100)

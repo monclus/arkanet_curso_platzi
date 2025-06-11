@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2y1n332esxmi"]
+
+[ext_resource type="Script" uid="uid://bsq22a6ek61g3" path="res://scripts/node_2d.gd" id="1_1ifvj"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_1ifvj"]
+[ext_resource type="Texture2D" uid="uid://hg42snfhm6ei" path="res://assets/joystick/joyknobpng.png" id="3_tieny"]
+
+[node name="ControlesTactiles" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("1_1ifvj")
+
+[node name="Virtual Joystick" parent="CanvasLayer/Node2D" instance=ExtResource("2_1ifvj")]
+offset_left = 80.0
+offset_top = 688.0
+offset_right = 428.0
+offset_bottom = 1036.0
+
+[node name="BotonAtaque" type="TouchScreenButton" parent="CanvasLayer/Node2D"]
+modulate = Color(1, 1, 1, 0.694118)
+position = Vector2(1520, 760)
+scale = Vector2(0.108333, 0.108333)
+texture_normal = ExtResource("3_tieny")
+action = "attack"
+
+[connection signal="pressed" from="CanvasLayer/Node2D/BotonAtaque" to="CanvasLayer/Node2D" method="_on_boton_ataque_pressed"]
+[connection signal="released" from="CanvasLayer/Node2D/BotonAtaque" to="CanvasLayer/Node2D" method="_on_boton_ataque_released"]

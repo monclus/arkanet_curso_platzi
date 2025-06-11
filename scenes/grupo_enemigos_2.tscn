@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg8pgh3508ifj"]
+
+[ext_resource type="Script" uid="uid://bhvwdoq52jcyc" path="res://scripts/grupo_enemigos.gd" id="1_cufei"]
+[ext_resource type="PackedScene" uid="uid://cd6t324wdjj63" path="res://scenes/enemigos.tscn" id="2_3w735"]
+
+[sub_resource type="Curve2D" id="Curve2D_d0qjq"]
+_data = {
+"points": PackedVector2Array(257.682, 11.2736, -257.682, -11.2736, 2326.62, 792, 156.445, -21.2144, -156.445, 21.2144, 1921.23, 232, 195.845, 128.308, -195.845, -128.308, 1439.45, 1000, 180.48, 109.097, -180.48, -109.097, 1224, 456, 111.467, -98.6051, -111.467, 98.6051, 873.621, 490.952, 255.371, 41.6751, -255.371, -41.6751, 311.392, 616)
+}
+point_count = 6
+
+[node name="GrupoEnemigos3" type="Path2D"]
+curve = SubResource("Curve2D_d0qjq")
+script = ExtResource("1_cufei")
+speed = 600
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(2326.62, 792)
+rotates = false
+loop = false
+
+[node name="Enemigos" parent="PathFollow2D" instance=ExtResource("2_3w735")]
+position = Vector2(-0.00012207, 0)
+scale = Vector2(0.8, 0.8)
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="."]
+position = Vector2(2234.05, 758.453)
+progress = 100.0
+rotates = false
+loop = false
+
+[node name="Enemigos" parent="PathFollow2D2" instance=ExtResource("2_3w735")]
+scale = Vector2(0.8, 0.8)
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="."]
+position = Vector2(2168.1, 684.004)
+progress = 200.0
+rotates = false
+loop = false
+
+[node name="Enemigos" parent="PathFollow2D3" instance=ExtResource("2_3w735")]
+scale = Vector2(0.8, 0.8)
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="."]
+position = Vector2(2122.41, 595.175)
+progress = 300.0
+rotates = false
+loop = false
+
+[node name="Enemigos" parent="PathFollow2D4" instance=ExtResource("2_3w735")]
+scale = Vector2(0.8, 0.8)
+
+[node name="PathFollow2D5" type="PathFollow2D" parent="."]
+position = Vector2(2086.66, 501.804)
+progress = 400.0
+rotates = false
+loop = false
+
+[node name="Enemigos" parent="PathFollow2D5" instance=ExtResource("2_3w735")]
+scale = Vector2(0.8, 0.8)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1073, 525)
+scale = Vector2(1, 1.2)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

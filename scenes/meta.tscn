@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=3 uid="uid://dv78gaed4mwke"]
+
+[ext_resource type="Texture2D" uid="uid://erwoiit8myne" path="res://assets/fondo/antena.png" id="1_keyex"]
+[ext_resource type="Script" uid="uid://uf58cgu3hk60" path="res://scripts/meta.gd" id="2_2e5v5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0hht"]
+atlas = ExtResource("1_keyex")
+region = Rect2(0, 0, 350, 950)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tky0e"]
+atlas = ExtResource("1_keyex")
+region = Rect2(350, 0, 350, 950)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywkvb"]
+atlas = ExtResource("1_keyex")
+region = Rect2(700, 0, 350, 950)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxwup"]
+atlas = ExtResource("1_keyex")
+region = Rect2(1050, 0, 350, 950)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rifl"]
+atlas = ExtResource("1_keyex")
+region = Rect2(1400, 0, 350, 950)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrnci"]
+atlas = ExtResource("1_keyex")
+region = Rect2(1750, 0, 350, 950)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_81hgl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0hht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tky0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywkvb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxwup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rifl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrnci")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_keyex"]
+resource_name = "Meta"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.439049, 0.439049, 0.439049, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2e5v5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.439049, 0.439049, 0.439049, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u0hht"]
+_data = {
+&"Meta": SubResource("Animation_keyex"),
+&"RESET": SubResource("Animation_2e5v5")
+}
+
+[node name="Meta" type="AnimatedSprite2D"]
+modulate = Color(0.439049, 0.439049, 0.439049, 1)
+sprite_frames = SubResource("SpriteFrames_81hgl")
+frame = 1
+frame_progress = 0.667434
+script = ExtResource("2_2e5v5")
+next_level = "res://scenes/nivel_1.tscn"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(248, 0)
+scale = Vector2(-4.04487, 3.72821)
+
+[node name="PosAntena" type="Marker2D" parent="."]
+position = Vector2(0, 128)
+
+[node name="PosSalida" type="Marker2D" parent="."]
+position = Vector2(768, -8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u0hht")
+}
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
