@@ -2,11 +2,12 @@ extends Area2D
 
 @export var valor_puntos : int = 50
 
-func set_explotion():
+func set_explotion() -> void:
 	Global.añadir_puntos(valor_puntos)
 	collision_mask = 0
 	collision_layer = 0
 	$AnimatedSprite2D.animation = "explosion"
+	$AudioStreamPlayer.play()
 	await $AnimatedSprite2D.animation_finished
 	queue_free()
 

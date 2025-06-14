@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://dvp23w382x2u6"]
+[gd_scene load_steps=23 format=3 uid="uid://dvp23w382x2u6"]
 
 [ext_resource type="Script" uid="uid://d2m455hno6ogj" path="res://scripts/enemigo_dirigido.gd" id="1_esmqi"]
-[ext_resource type="Texture2D" uid="uid://dmjwcoxgpbe8s" path="res://assets/enemigos/enemigo2.png" id="1_oulhn"]
-[ext_resource type="Texture2D" uid="uid://0dna85waru82" path="res://assets/enemigos/explosion.png" id="2_c5jkh"]
+[ext_resource type="Texture2D" uid="uid://cfm7dns2mxx08" path="res://assets/enemigos/enemigo2.png" id="1_oulhn"]
+[ext_resource type="Texture2D" uid="uid://c6203gj2qw1gb" path="res://assets/enemigos/explosion.png" id="2_c5jkh"]
+[ext_resource type="AudioStream" uid="uid://btecaegpnab8o" path="res://sounds/sfx/enemigo_destruido.ogg" id="4_sw42p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfks5"]
 atlas = ExtResource("2_c5jkh")
@@ -149,6 +150,10 @@ shape = SubResource("CapsuleShape2D_1g5y6")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(4, 4.5)
 scale = Vector2(3.9, 1.65)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_sw42p")
+bus = &"SFX"
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

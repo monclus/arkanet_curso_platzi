@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://pq0wnq4oigw2"]
+[gd_scene load_steps=28 format=4 uid="uid://pq0wnq4oigw2"]
 
 [ext_resource type="Texture2D" uid="uid://dyj06khy2o6nk" path="res://assets/fondo/fondo.jpg" id="1_hrsa5"]
 [ext_resource type="PackedScene" uid="uid://rn5hkq2hlf0s" path="res://scenes/personaje.tscn" id="1_s5enk"]
@@ -14,8 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://b1nnv7y5cqidl" path="res://assets/hud/vida.png" id="10_vwgcu"]
 [ext_resource type="Texture2D" uid="uid://b7vhngodrih8h" path="res://assets/hud/tabla_puntos.png" id="11_851hy"]
 [ext_resource type="FontFile" uid="uid://bg7ihym4m11ku" path="res://assets/fonts/Kubika Font/Kubika Rough.ttf" id="12_vwgcu"]
+[ext_resource type="Script" uid="uid://cagt4j86451vv" path="res://scripts/hud.gd" id="13_0qj6g"]
 [ext_resource type="Texture2D" uid="uid://ynlv8r83jl0n" path="res://assets/fondo/tilemap.png" id="13_851hy"]
 [ext_resource type="PackedScene" uid="uid://b2y1n332esxmi" path="res://scenes/controles_tactiles.tscn" id="16_r6w1h"]
+[ext_resource type="AudioStream" uid="uid://c2jmfj4ra6vrb" path="res://sounds/bgm/Archnet-music-background_mezcla.ogg" id="17_co0c6"]
+[ext_resource type="FontFile" uid="uid://bii5qibqyn8m" path="res://assets/fonts/Presets/Kubika.tres" id="18_qx8k3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r6w1h"]
 font = ExtResource("12_vwgcu")
@@ -34,7 +37,7 @@ normal = Vector2(-1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gnqo2"]
 normal = Vector2(0, 1)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yc8pd"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_co0c6"]
 texture = ExtResource("13_851hy")
 texture_region_size = Vector2i(90, 90)
 0:0/0 = 0
@@ -105,7 +108,7 @@ physics_layer_0/collision_mask = 4
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terreno"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/1 = SubResource("TileSetAtlasSource_yc8pd")
+sources/1 = SubResource("TileSetAtlasSource_co0c6")
 
 [sub_resource type="LabelSettings" id="LabelSettings_vwgcu"]
 line_spacing = 0.0
@@ -114,7 +117,7 @@ font_size = 50
 shadow_size = 8
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="Nivel1" type="Node2D"]
+[node name="Nivel1" type="Node2D" groups=["BGM"]]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -293,6 +296,7 @@ tile_map_data = PackedByteArray("AAAbAAQAAQAAAAAAAAAbAAUAAQABAAEAAAAaAAUAAQAAAAA
 tile_set = SubResource("TileSet_qm6nr")
 
 [node name="HUD" type="CanvasLayer" parent="." groups=["HUD"]]
+script = ExtResource("13_0qj6g")
 
 [node name="BarraVida" type="TextureRect" parent="HUD"]
 offset_left = 50.0
@@ -345,3 +349,108 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="ControlesTactiles" parent="HUD" instance=ExtResource("16_r6w1h")]
+
+[node name="Pausa" type="Button" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_bottom = 56.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+
+[node name="ColorRect3" type="ColorRect" parent="HUD/Pausa"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 40.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 0
+
+[node name="ColorRect2" type="ColorRect" parent="HUD/Pausa"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 24.0
+offset_right = -16.0
+offset_bottom = 32.0
+grow_horizontal = 0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Pausa"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+
+[node name="MenuPausa" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/MenuPausa"]
+modulate = Color(0.45, 0.45, 0.45, 0.784314)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Continuar" type="Button" parent="HUD/MenuPausa"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -142.0
+offset_right = 202.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("18_qx8k3")
+theme_override_font_sizes/font_size = 100
+text = "CONTINUAR"
+
+[node name="SalirMenu" type="Button" parent="HUD/MenuPausa"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = 10.0
+offset_right = 109.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("18_qx8k3")
+theme_override_font_sizes/font_size = 100
+text = "MENU PRINCIPAL"
+
+[node name="BGM" type="AudioStreamPlayer" parent="." groups=["BGM"]]
+stream = ExtResource("17_co0c6")
+autoplay = true
+bus = &"BGM"
+
+[connection signal="pressed" from="HUD/Pausa" to="HUD" method="_on_pausa_pressed"]
+[connection signal="pressed" from="HUD/MenuPausa/Continuar" to="HUD" method="_on_continuar_pressed"]
+[connection signal="pressed" from="HUD/MenuPausa/SalirMenu" to="HUD" method="_on_salir_menu_pressed"]

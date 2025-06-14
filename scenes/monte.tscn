@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dhdebfxhfcegf"]
 
-[ext_resource type="Texture2D" uid="uid://bgfoao35x27ej" path="res://assets/fondo/montana.png" id="1_jyyp0"]
+[ext_resource type="Texture2D" uid="uid://cucydyp28mmc5" path="res://assets/fondo/montana.png" id="1_jyyp0"]
 
 [node name="Monte" type="Node2D"]
 

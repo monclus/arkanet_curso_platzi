@@ -11,13 +11,18 @@ config_version=5
 [application]
 
 config/name="Arkanet"
-run/main_scene="uid://pq0wnq4oigw2"
+run/main_scene="uid://b8l7w2ojclviv"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="uid://bj8po3eyk4e4h"
 
 [autoload]
 
 Global="*res://scripts/Global.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/inferred_declaration=2
 
 [display]
 
@@ -35,6 +40,7 @@ Enemigos=""
 Personaje=""
 HUD=""
 Obstaculos=""
+BGM=""
 
 [input]
 

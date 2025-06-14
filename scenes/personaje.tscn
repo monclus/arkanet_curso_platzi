@@ -1,8 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://rn5hkq2hlf0s"]
+[gd_scene load_steps=39 format=3 uid="uid://rn5hkq2hlf0s"]
 
 [ext_resource type="Script" uid="uid://ql44w0xnwyff" path="res://scripts/personaje.gd" id="1_xvalt"]
-[ext_resource type="Texture2D" uid="uid://dbmpg8e881oy2" path="res://assets/personaje/pj_barco_2.png" id="2_auoqv"]
-[ext_resource type="Texture2D" uid="uid://cwb15kbns4jgs" path="res://assets/personaje/pj_globo.png" id="3_hrhk4"]
+[ext_resource type="Texture2D" uid="uid://bpxo33y2y7jgm" path="res://assets/personaje/pj_barco_2.png" id="2_auoqv"]
+[ext_resource type="Texture2D" uid="uid://dus01f20m4kt0" path="res://assets/personaje/pj_globo.png" id="3_hrhk4"]
+[ext_resource type="AudioStream" uid="uid://b77nujqv266xc" path="res://sounds/sfx/disparo.ogg" id="4_auoqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvalt"]
 atlas = ExtResource("2_auoqv")
@@ -128,7 +129,7 @@ states/power_up/position = Vector2(375, 212)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_hrhk4"), "RESET", "damaged", SubResource("AnimationNodeStateMachineTransition_b1pmb"), "damaged", "RESET", SubResource("AnimationNodeStateMachineTransition_xvalt"), "RESET", "power_up", SubResource("AnimationNodeStateMachineTransition_ink26"), "power_up", "RESET", SubResource("AnimationNodeStateMachineTransition_rirxc"), "power_up", "damaged", SubResource("AnimationNodeStateMachineTransition_vti64"), "damaged", "power_up", SubResource("AnimationNodeStateMachineTransition_ho3dl")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ink26"]
-graph_offset = Vector2(-264.397, -3.29379)
+graph_offset = Vector2(-258.115, 103.313)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_xvalt")
 nodes/Add2/position = Vector2(540, 20)
 nodes/Anim_Movimiento/node = SubResource("AnimationNodeBlendSpace2D_4w6sy")
@@ -403,6 +404,10 @@ position = Vector2(137, 21)
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(1.5, -18)
 scale = Vector2(12.75, 8.6)
+
+[node name="AudioDisparo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_auoqv")
+bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

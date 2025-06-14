@@ -4,16 +4,16 @@ extends CharacterBody2D
 @export var speed : int = 400
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var enfriamiento: Timer = $Enfriamiento
-@onready var HUD := get_tree().get_nodes_in_group("HUD")[0]
-@onready var disparo := preload("res://scenes/Disparo.tscn")
-@onready var disparo_especial := preload("res://scenes/disparo_especial.tscn")
+@onready var HUD : Node = get_tree().get_nodes_in_group("HUD")[0]
+@onready var disparo : Resource= preload("res://scenes/Disparo.tscn")
+@onready var disparo_especial : Resource = preload("res://scenes/disparo_especial.tscn")
 @onready var power_up: bool = false
-@onready var touch_joystick_master_position: Vector2
-@onready var touch_joystick_relative_position: Vector2
-@onready var joystick := HUD.get_node("Joystick")
-@onready var button := HUD.get_node("BotonAtaque")
+@onready var bus_index : int = AudioServer.get_bus_index("BGM")
+@onready var audio_effect : AudioEffect = AudioServer.get_bus_effect(bus_index, 0)
 
 func _ready() -> void:
+	audio_effect["pitch_scale"] = 1
+	#AudioServer.get_bus_effect(bus_index, )
 	Global.health = 3
 	Global.puntos = 0
 	Global.Label_puntos = HUD.get_node("BarraPuntos/Puntos")
@@ -22,10 +22,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if power_up:
 		animation_tree["parameters/StateMachine/conditions/got_power"] = true
+		audio_effect["pitch_scale"] = 2
 
-func _get_inputs():
+func _get_inputs() -> void:
 	velocity = Input.get_vector("move_backward","move_forward","move_up","move_down") * speed
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_pressed("attack"):
 		_shoot()
 		
 func _physics_process(delta: float) -> void:
@@ -34,7 +35,7 @@ func _physics_process(delta: float) -> void:
 		animation_tree["parameters/Anim_Movimiento/blend_position"] = velocity.normalized()
 		move_and_slide()
 
-func _shoot():
+func _shoot() -> void:
 	if enfriamiento.is_stopped():
 		enfriamiento.start()
 		var instancia_disparo : Node
@@ -44,6 +45,7 @@ func _shoot():
 			instancia_disparo = disparo.instantiate()
 		instancia_disparo.position = $Arma.global_position
 		add_child(instancia_disparo)
+		$AudioDisparo.play()
 		instancia_disparo.set_as_top_level(true)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -51,7 +53,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		_take_damage()
 		area.set_explotion()
 
-func _take_damage():
+func _take_damage() -> void:
 	Global.quitar_vidas()
 	var barra_vida: Node = HUD.get_node("BarraVida")
 	var vidas: Array = barra_vida.get_children()
@@ -63,6 +65,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 		animation_tree["parameters/StateMachine/conditions/got_damaged"] = false
 	if anim_name == "power_up":
 		power_up = false
+		audio_effect["pitch_scale"] = 1
 		animation_tree["parameters/StateMachine/conditions/got_power"] = false
 
 func _on_enfriamiento_timeout() -> void:

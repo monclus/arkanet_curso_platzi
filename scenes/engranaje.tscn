@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4fjq1kk5ua7g"]
 
-[ext_resource type="Texture2D" uid="uid://bjmc8p3exs8ag" path="res://assets/fondo/engranaje.png" id="1_pi72h"]
+[ext_resource type="Texture2D" uid="uid://37l724tv5rdl" path="res://assets/fondo/engranaje.png" id="1_pi72h"]
 
 [sub_resource type="Animation" id="Animation_nbw6r"]
 length = 0.001

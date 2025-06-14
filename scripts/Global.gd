@@ -17,14 +17,14 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pausa"):
 		pausa = not pausa
 
-func quitar_vidas():
+func quitar_vidas() -> void:
 	if health > 1:
 		health -= 1
 		#print("Vida:" +  str(health))
 	else:
 		get_tree().reload_current_scene()
 		
-func añadir_puntos(valor: int):
+func añadir_puntos(valor: int) -> void:
 	#print("Puntos:" +  str(puntos))
 	puntos += valor
 	Label_puntos.text = str(puntos)
